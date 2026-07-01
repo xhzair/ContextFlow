@@ -415,8 +415,17 @@ class EdgeSidebar(QWidget):
         while self._card_layout.count():
             item = self._card_layout.takeAt(0)
             if item.widget(): item.widget().deleteLater()
-        for ws in self._workspaces:
-            self._card_layout.addWidget(self._make_card(ws))
+        if not self._workspaces:
+            # Empty state
+            empty = QLabel("No workspaces yet\n\nClick + Save Current Windows\nto save your first workspace")
+            empty.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            empty.setFont(QFont("Microsoft YaHei", 10))
+            empty.setStyleSheet("color:#666;background:transparent;border:none;padding:20px;")
+            empty.setWordWrap(True)
+            self._card_layout.addWidget(empty)
+        else:
+            for ws in self._workspaces:
+                self._card_layout.addWidget(self._make_card(ws))
         self._card_layout.addStretch()
 
     def _make_card(self, ws: dict) -> QWidget:

@@ -187,13 +187,16 @@ class ContextFlowApp:
         self._handle = get_handle()
         self._handle.panel_requested.connect(self._on_panel_show)
         self._handle.hide_requested.connect(self._on_panel_hide)
-        self._handle.set_panel_ref(self.sidebar)  # for mouse polling
+        self._handle.set_panel_ref(self.sidebar)
         self._handle.show()
 
         self.sidebar.show()
         self.sidebar.slide_out()
 
-        # ── first-run check ──
+        # Global hotkeys
+        self._start_hotkeys()
+
+        # First-run check
         if self.db.get_setting("first_run_done") != "1":
             QTimer.singleShot(500, self._show_first_run_wizard)
 
@@ -221,6 +224,23 @@ class ContextFlowApp:
         )
         self._handle.set_panel_visible(False)
         self._handle._poll_timer.stop()
+
+    def _start_hotkeys(self):
+        """Global hotkeys: Ctrl+Shift+H toggle panel, Ctrl+Shift+S save."""
+        try:
+            from pynput.keyboard import GlobalHotKeys
+            def toggle():
+                if self._handle._panel_visible:
+                    self._on_panel_hide()
+                else:
+                    self._on_panel_show()
+            self._hotkey_listener = GlobalHotKeys({
+                '<ctrl>+<shift>+h': toggle,
+                '<ctrl>+<shift>+s': self._save_workspace,
+            })
+            self._hotkey_listener.start()
+        except Exception:
+            pass
 
     def _refresh_sidebar_workspaces(self):
         self.sidebar.set_workspaces(self.db.list_contexts())
@@ -776,6 +796,8 @@ class ContextFlowApp:
         self._poll_timer.stop()
         self._discovery_timer.stop()
         self._discovery_check_timer.stop()
+        if hasattr(self, '_hotkey_listener'):
+            self._hotkey_listener.stop()
         self.sidebar.close()
         self.db.close()
         self.app.quit()
