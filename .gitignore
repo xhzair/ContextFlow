@@ -21,6 +21,7 @@ data/*.db-*
 .DS_Store
 Thumbs.db
 
-# Assets (keep only final)
+# Assets (keep only final icons)
+assets/demo.gif
 assets/icon_v1.*
 assets/icon_test*.png

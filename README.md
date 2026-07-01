@@ -4,8 +4,6 @@
 
 A Windows desktop tool that remembers which apps and windows you have open for each project. Hover the right edge of your screen, save your current setup, and switch between workspaces with one click.
 
-![demo](assets/demo.gif)
-
 ## Features
 
 - **🖱️ Hover to reveal** — Move your mouse to the right screen edge to open the workspace panel
