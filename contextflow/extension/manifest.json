@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "ContextFlow Bridge",
+  "version": "1.0",
+  "description": "Sends current browser tabs to the ContextFlow desktop app.",
+  "permissions": ["tabs", "nativeMessaging"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

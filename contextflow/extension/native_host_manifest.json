@@ -1,0 +1,9 @@
+{
+  "name": "com.contextflow.bridge",
+  "description": "ContextFlow — send browser tabs to desktop app",
+  "path": "CONTEXTFLOW_NATIVE_HOST_PATH",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://CONTEXTFLOW_EXTENSION_ID/"
+  ]
+}

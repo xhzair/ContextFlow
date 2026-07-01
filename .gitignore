@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Build
+dist/
+build/
+*.spec
+
+# Data
+data/*.db
+data/*.db-*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Assets (keep only final)
+assets/icon_v1.*
+assets/icon_test*.png
